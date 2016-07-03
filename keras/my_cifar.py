@@ -31,7 +31,9 @@ def load_mapping():
     return mapping
 
 if __name__ == '__main__':
-    img_names = ['standing-cat.jpg', 'dog-face.jpg', 'bird.jpeg', 'car.jpeg', 'truck.jpeg', 'ape.jpg', 'duck.jpg', 'mustbebird.jpeg']
+    img_names = ['standing-cat.jpg', 'dog-face.jpg', 'bird.jpeg', 'car.jpeg', 'truck.jpeg', 'ape.jpg', 'duck.jpg', 'mustbebird.jpeg',
+                 'cnBird.jpeg', 'cnBird2.jpeg', '3birds.jpeg'
+                 ]
     imgs = load_and_scale_imgs(img_names)
 
     model = model_from_json(open('my_model_architecture.json').read())
