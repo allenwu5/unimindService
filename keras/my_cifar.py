@@ -36,8 +36,8 @@ if __name__ == '__main__':
                  ]
     imgs = load_and_scale_imgs(img_names)
 
-    model = model_from_json(open('my_model_architecture.json').read())
-    model.load_weights('my_model_weights.h5')
+    model = model_from_json(open('cifar10.json').read())
+    model.load_weights('cifar10.h5')
 
     sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
     model.compile(loss='categorical_crossentropy',

@@ -9,6 +9,7 @@ from keras.preprocessing.image import ImageDataGenerator
 from keras.datasets import cifar100
 from keras.utils import np_utils
 
+nb_epoch = 35
 sys.stdout = os.fdopen(sys.stdout.fileno(), 'w', 0) # Hack to make print flush immediately
 
 def prepare_input_data(X_train, X_test):
@@ -68,6 +69,11 @@ datagen = ImageDataGenerator(
 datagen.fit(X_train)
 hist = model.fit_generator(datagen.flow(X_train, y_train, batch_size=128),
                         samples_per_epoch=X_train.shape[0],
-                        nb_epoch=200, show_accuracy=True,
+                        nb_epoch=nb_epoch, show_accuracy=True,
                         validation_data=(X_test, y_test),
                         nb_worker=1)
+
+# Save model structure into json and weights into h5
+json_string = model.to_json()
+open('cifar100.json', 'w').write(json_string)
+model.save_weights('cifar100.h5', overwrite=True)

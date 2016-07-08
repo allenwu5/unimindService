@@ -112,5 +112,5 @@ else:
 
 # Save model structure into json and weights into h5
 json_string = model.to_json()
-open('my_model_architecture.json', 'w').write(json_string)
-model.save_weights('my_model_weights.h5', overwrite=True)
+open('cifar10.json', 'w').write(json_string)
+model.save_weights('cifar10.h5', overwrite=True)
