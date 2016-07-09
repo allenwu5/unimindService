@@ -1,7 +1,7 @@
-'''Train a simple deep CNN on the CIFAR10 small images dataset.
+'''Train a simple deep CNN on the CIFAR100 small images dataset.
 
 GPU run command:
-    THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cifar10_cnn.py
+    THEANO_FLAGS=mode=FAST_RUN,device=gpu,floatX=float32 python cifar100_cnn.py
 
 It gets down to 0.65 test logloss in 25 epochs, and down to 0.55 after 50 epochs.
 (it's still underfitting at that point, though).
@@ -21,14 +21,14 @@ from keras.optimizers import SGD
 from keras.utils import np_utils
 
 batch_size = 32
-nb_classes = 10
+nb_classes = 100
 # nb_epoch = 200
-nb_epoch = 70
+nb_epoch = 75
 data_augmentation = True
 
 # input image dimensions
 img_rows, img_cols = 32, 32
-# the cifar100 images are RGB
+# the CIFAR100 images are RGB
 img_channels = 3
 
 # the data, shuffled and split between train and test sets
