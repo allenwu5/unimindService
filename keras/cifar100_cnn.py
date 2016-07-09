@@ -69,9 +69,8 @@ datagen = ImageDataGenerator(
 datagen.fit(X_train)
 hist = model.fit_generator(datagen.flow(X_train, y_train, batch_size=128),
                         samples_per_epoch=X_train.shape[0],
-                        nb_epoch=nb_epoch, show_accuracy=True,
-                        validation_data=(X_test, y_test),
-                        nb_worker=1)
+                        nb_epoch=nb_epoch,
+                        validation_data=(X_test, y_test))
 
 # Save model structure into json and weights into h5
 json_string = model.to_json()
