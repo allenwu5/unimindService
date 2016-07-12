@@ -22,7 +22,7 @@ class Dataset:
 
 if __name__ == '__main__':
 
-    mode = Dataset.CIFAR100
+    mode = Dataset.CIFAR10
 
     import os
     if mode == Dataset.CIFAR10:
