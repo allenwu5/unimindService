@@ -10,13 +10,7 @@ application = Flask(__name__)
 def test_s3():
     # Let's use Amazon S3
     s3 = boto3.resource('s3')
-    # client = boto3.client(
-    #     's3',
-    #     # Hard coded strings as credentials, not recommended.
-    #     # us-west-2
-    #     aws_access_key_id='AKIAJWDOXVJRFPKTBQNQ',
-    #     aws_secret_access_key='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'
-    # )
+
 
     bucket = s3.Bucket('unimind-userfiles-mobilehub-1656990244')
 
