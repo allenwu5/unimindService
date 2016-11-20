@@ -8,23 +8,13 @@ path.append(getcwd() + "/keras") #Yes, i'm on windows
 print path
 import my_cifar as cf
 
+from image.cifar_image import CifarImage
+
 import boto3
 import cStringIO
 
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
-
-@application.route('/cifar')
-def cifar():
-    cf.path = 'keras/'
-    img_names = ['standing-cat.jpg', 'dog-face.jpg', 'bird.jpeg', 'car.jpeg', 'truck.jpeg', 'ape.jpg', 'duck.jpg', 'mustbebird.jpeg',
-             'cnBird.jpeg', 'cnBird2.jpeg', '3birds.jpeg'
-             ]
-    for i in xrange(len(img_names)):
-        img_names[i] = cf.path + '../cifar_images/' + img_names[i]
-    imgs = cf.load_and_scale_imgs(img_names)
-    return cf.classify(img_names, imgs)
-
 
 @application.route('/s3')
 def s3():
@@ -53,28 +43,26 @@ def root():
 
     bucket = s3.Bucket('unimind-userfiles-mobilehub-1656990244')
 
-    img_names = []
+    cifar_imgs = []
 
-    html = ""
     for obj in bucket.objects.all():
         key = obj.key
 
         # only debugging specific case now
-        if key == 'public/w32/1472541858.06554/84.jpeg':
+        if key.startswith('public/w32/1472541858.06554/'):
             body = obj.get()['Body'].read()
-            img = cStringIO.StringIO(body)
-            img_names.append(img)
 
+            ci = CifarImage()
+            ci.name = key
+            ci.body = cStringIO.StringIO(body)
+            cifar_imgs.append(ci)
 
     cf.path = 'keras/'
+    pre_processed_imgs = cf.pre_process(cifar_imgs)
+    result = cf.classify(cifar_imgs, pre_processed_imgs)
 
-    # for i in xrange(len(img_names)):
-    #     img_names[i] = cf.path + '../cifar_images/' + img_names[i]
-    imgs = cf.load_and_scale_imgs(img_names)
-    img_names = [key]
-    result = cf.classify(img_names, imgs)
 
-    # upload result to
+    # upload result to ...
     return result
 
 # run the app.
