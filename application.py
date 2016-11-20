@@ -51,7 +51,7 @@ def root():
         # only debugging specific case now
         if key.startswith('public/w32/1472541858.06554/'):
             body = obj.get()['Body'].read()
-
+            #
             ci = CifarImage()
             ci.name = key
             ci.body = cStringIO.StringIO(body)
