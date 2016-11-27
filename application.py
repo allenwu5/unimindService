@@ -5,13 +5,13 @@ from flask import Flask
 from sys import path
 from os import getcwd
 path.append(getcwd() + "/keras") #Yes, i'm on windows
-print path
+print(path)
 import my_cifar as cf
 
 from image.cifar_image import CifarImage
 
 import boto3
-import cStringIO
+from io import BytesIO
 
 # EB looks for an 'application' callable by default.
 application = Flask(__name__)
@@ -54,7 +54,7 @@ def root():
             #
             ci = CifarImage()
             ci.name = key
-            ci.body = cStringIO.StringIO(body)
+            ci.body = BytesIO(body)
             cifar_imgs.append(ci)
 
     cf.path = 'keras/'

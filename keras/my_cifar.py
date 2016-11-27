@@ -1,3 +1,4 @@
+# python3
 # import pydot
 # print pydot.find_graphviz()
 
@@ -61,7 +62,7 @@ def classify(cifar_imgs, pre_processed_imgs):
     predictions = model.predict_classes(pre_processed_imgs)
 
     result = ''
-    for i in xrange(len(cifar_imgs)):
+    for i in range(len(cifar_imgs)):
         result += ('<br>{0} = {1}\n'.format(cifar_imgs[i].name, class_names[label_name_key][predictions[i]]))
 
     return result
@@ -73,7 +74,7 @@ def test():
                  ]
 
     cifar_imgs = []
-    for i in xrange(len(names)):
+    for i in range(len(names)):
         ci = CifarImage()
         ci.name = names[i]
         ci.path = path + '../cifar_images/' + names[i]
